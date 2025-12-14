@@ -1,0 +1,230 @@
+/* Reseteo mínimo */
+* {
+  box-sizing: border-box;
+}
+
+/* HEADER DESKTOP =================================================== */
+
+.header-desktop {
+  position: fixed;
+  top: 32px; /* leave space for top banner */
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+  z-index: 50;
+  display: block;
+  padding: 10px 0;
+}
+
+.header-desktop-inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 8px 16px;
+  align-items: center;
+}
+
+/* Logo */
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+.logo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo-icon {
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.logo-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+/* Buscador */
+.header-search {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #000;
+  padding-bottom: 6px;
+  gap: 8px;
+  width: 100%;
+}
+
+.search-icon {
+  font-size: 16px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+}
+
+/* Menú principal */
+.header-nav {
+  grid-column: 1 / -1;
+  grid-row: 2 / 3;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  justify-content: center;
+  font-size: 13px;
+}
+
+.nav-item {
+  border: none;
+  background: transparent;
+  padding: 4px 8px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.nav-item:hover {
+  text-decoration: underline;
+}
+
+.nav-item--offers {
+  background: #8f857b;
+  color: #fff;
+  border-radius: 2px;
+}
+
+/* Acciones derecha */
+.header-actions {
+  grid-column: 3 / 4;
+  grid-row: 1 / 2;
+  display: flex;
+  gap: 12px;
+  justify-self: end;
+}
+
+.icon-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.icon {
+  font-size: 18px;
+}
+
+.icon-label {
+  margin-top: 2px;
+}
+
+/* NAV INFERIOR MOBILE ============================================= */
+
+.bottom-nav-mobile {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 64px;
+  background: #ffffff;
+  border-top: 1px solid #e5e5e5;
+  display: none; /* se muestra sólo en mobile */
+  z-index: 50;
+
+  display: none;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.bottom-nav-item {
+  flex: 1;
+  border: none;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.bottom-nav-item--primary {
+  height: 80px;
+  width: 80px;
+  border-radius: 999px;
+  margin-top: -24px;
+  background: #24292e;
+  color: #ffffff;
+}
+
+.bottom-icon {
+  font-size: 18px;
+}
+
+.bottom-label {
+  margin-top: 2px;
+}
+
+/* RESPONSIVE RULES ================================================= */
+
+/* Mobile primero: oculto header desktop y muestro bottom nav */
+@media (max-width: 767px) {
+  .header-desktop {
+    display: none;
+  }
+
+  .bottom-nav-mobile {
+    display: flex;
+  }
+
+  /* Aumentar un poco más los iconos en móvil, excepto el carrito */
+  .bottom-icon { font-size: 24px; }
+  .icon { font-size: 22px; }
+
+  /* Mantener el icono del carrito sin aumento */
+  .icon-cart .icon { font-size: 18px; }
+  .bottom-nav-item--primary .bottom-icon { font-size: 18px; }
+
+  .bottom-label, .icon-label { font-size: 12px; }
+}
+
+/* Desktop: muestro header, oculto bottom nav */
+@media (min-width: 768px) {
+  .header-desktop {
+    display: flex;
+  }
+
+  .bottom-nav-mobile {
+    display: none;
+  }
+  /* ocultar botón de menú en escritorio (las categorías están visibles) */
+  .header-actions .icon-menu { display: none; }
+}

@@ -1,0 +1,84 @@
+/* Component styles */
+*{
+  padding: 0;
+}
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.site-header, .header-desktop {
+  background: #fff;
+  border-bottom: 1px solid #e6eef6;
+  padding: 1rem 0;
+}
+
+.brand, .logo-text {
+  margin: 0;
+  display: inline-block;
+}
+
+.nav, .header-nav {
+  float: right;
+}
+
+.nav-link {
+  margin-left: 1rem;
+  color: #0f172a;
+  text-decoration: none;
+}
+
+.home {
+  padding: 2rem 0;
+}
+
+.product-section {
+  padding: 2rem 0;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .product-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    padding: 0 0.75rem;
+    box-sizing: border-box;
+  }
+}
+
+.site-footer {
+  margin-top: 3rem;
+  padding: 1rem 0;
+  text-align: center;
+  color: #94a3b8;
+}
+
+.btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn.secondary {
+  background: #64748b;
+}
+
+/* Header-specific classes used in Header/Header.css may override these */

@@ -1,0 +1,42 @@
+[
+  {
+    "id": 101,
+    "name": "Lino Natural Premium",
+    "slug": "lino-natural-premium",
+    "description": "Lino 100% natural, ideal para tapicería y confección.",
+    "price": 1990.00,
+    "image": "uploads/img/lino-natural.jpg",
+    "category": "Linos",
+    "stock": 25
+  },
+  {
+    "id": 102,
+    "name": "Tela Estampada Floral",
+    "slug": "tela-estampada-floral",
+    "description": "Estampado floral de alta definición, suave al tacto.",
+    "price": 1490.00,
+    "image": "uploads/img/estampada-floral.jpg",
+    "category": "Estampadas",
+    "stock": 40
+  },
+  {
+    "id": 103,
+    "name": "Franela Clásica",
+    "slug": "franela-clasica",
+    "description": "Franela cálida y resistente, perfecta para invierno.",
+    "price": 1290.00,
+    "image": "uploads/img/franela-clasica.jpg",
+    "category": "Franelas",
+    "stock": 30
+  },
+  {
+    "id": 104,
+    "name": "Algodón Blanco",
+    "slug": "algodon-blanco",
+    "description": "Algodón suave, 200 hilos, ideal para sábanas.",
+    "price": 990.00,
+    "image": "uploads/img/algodon-blanco.jpg",
+    "category": "Algodones",
+    "stock": 50
+  }
+]
