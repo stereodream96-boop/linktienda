@@ -13,3 +13,4 @@ coverage/
 /.idea/node_modules/
 dist/
 .env
+api/.env.php

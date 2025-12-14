@@ -11,6 +11,7 @@ import MenuModal from './components/Menu/MenuModal'
 import { CartProvider } from './context/CartContext'
 import { ProductProvider } from './context/ProductContext'
 import CartPage from './pages/Cart'
+import CaptivePortal from './pages/Captive'
 
 export default function App() {
   const [path, setPath] = useState(typeof window !== 'undefined' ? window.location.pathname : '/')
@@ -25,33 +26,40 @@ export default function App() {
 
   // extrae slug para /categoria/:slug
   const isCategory = path.startsWith('/categoria/')
+  const isPortal = path === '/portal' || path.startsWith('/portal/')
   const categorySlug = isCategory ? path.replace('/categoria/', '') : null
   return (
     <ProductProvider>
       <CartProvider>
         <div className="app">
-          <TopBanner />
-          <Header onOpenSearch={() => setSearchOpen(true)} onOpenMenu={() => setMenuOpen(true)} />
+          {!isPortal && (
+            <>
+              <TopBanner />
+              <Header onOpenSearch={() => setSearchOpen(true)} onOpenMenu={() => setMenuOpen(true)} />
+            </>
+          )}
           {path === '/admin' ? (
             <Admin />
           ) : path === '/cuenta' ? (
             <Account />
           ) : path === '/carrito' ? (
             <CartPage />
+          ) : isPortal ? (
+            <CaptivePortal />
           ) : isCategory ? (
             <Category slug={categorySlug} />
           ) : (
             <Home />
           )}
-          <Footer />
+          {!isPortal && <Footer />}
 
-          {searchOpen && (
+          {!isPortal && searchOpen && (
             <React.Suspense fallback={null}>
               <SearchModal onClose={() => setSearchOpen(false)} />
             </React.Suspense>
           )}
 
-          {menuOpen && (
+          {!isPortal && menuOpen && (
             <React.Suspense fallback={null}>
               <MenuModal onClose={() => setMenuOpen(false)} />
             </React.Suspense>
