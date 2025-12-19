@@ -1,9 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import pantonBold from '../fonts/Panton-Bold.ttf'
 import logoImg from '../../img/logo_APC2.png'
 
-const API_URL = 'https://www.linktienda.com/api/captive.php'
+// Use protocol-relative URL so the API call follows the page protocol (http or https).
+const API_URL = '//www.linktienda.com/api/captive.php'
 const REDIRECT_URL = 'https://www.instagram.com/apc_lujandecuyo/'
+
+// Mikrotik login configuration used to activate the client on the hotspot.
+// Ajustado: usuario y contraseña fijos proporcionados por el cliente.
+const MIKROTIK_IP = '192.168.100.1'
+const MIKROTIK_USE_EMAIL_AS_USERNAME = false
+const MIKROTIK_USERNAME = 'apc-pc'
+const MIKROTIK_PASSWORD = 'apc-pc'
 
 export default function CaptivePortal() {
   const [email, setEmail] = useState('')
@@ -30,7 +38,28 @@ export default function CaptivePortal() {
         return
       }
       setError('')
-      window.location.assign(REDIRECT_URL)
+      // Construir URL de login de Mikrotik y navegar allí para activar el cliente.
+      try {
+        const username = MIKROTIK_USE_EMAIL_AS_USERNAME ? email : MIKROTIK_USERNAME
+        const password = MIKROTIK_PASSWORD || ''
+        const dst = REDIRECT_URL
+        const mikrotikUrl = `http://${MIKROTIK_IP}/login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&dst=${encodeURIComponent(dst)}&popup=true`
+
+        // Intentar navegar al Mikrotik (misma pestaña) para que el router confirme y redirija al destino.
+        // Si esto falla (por CORS/HSTS/otras políticas) abrimos Instagram en una nueva pestaña como fallback.
+        try {
+          window.location.href = mikrotikUrl
+          // Nota: la navegación normalmente transferirá al router y luego al destino (Instagram).
+        } catch (navErr) {
+          console.warn('No se pudo navegar al Mikrotik, fallback a Instagram:', navErr)
+          const win = window.open(REDIRECT_URL, '_blank', 'noopener,noreferrer')
+          if (win) win.opener = null
+        }
+      } catch (errInner) {
+        console.error('Error al preparar login Mikrotik:', errInner)
+        const win = window.open(REDIRECT_URL, '_blank', 'noopener,noreferrer')
+        if (win) win.opener = null
+      }
     } catch (err) {
       console.error('Captive submit error:', err)
       setError(`Error de conexión: ${err.message}`)
